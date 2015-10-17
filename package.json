@@ -6,7 +6,7 @@
     "email": "ilg@livius.net",
     "url": "http://liviusdotnet.wordpress.com"
   },
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "./lib/main.js",
   "license": "GPL-3.0",
   "repository": {
@@ -22,5 +22,5 @@
   "bugs": {
     "url": "https://github.com/xcdl/xcdl/issues"
   },
-  "homepage": "https://xcdl.github.io/",
+  "homepage": "https://xcdl.github.io/"
 }
