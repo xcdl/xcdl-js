@@ -1,0 +1,26 @@
+{
+  "name": "xcdl",
+  "description": "The XCDL command line application.",
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "http://liviusdotnet.wordpress.com"
+  },
+  "version": "1.1.1",
+  "main": "./lib/main.js",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/xcdl/xcdl.git"
+  },
+  "contributors": [
+    {
+      "name": "Liviu Ionescu",
+      "email": "ilg@livius.net"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/xcdl/xcdl/issues"
+  },
+  "homepage": "https://xcdl.github.io/",
+}
