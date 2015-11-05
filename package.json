@@ -1,26 +1,57 @@
 {
-  "name": "xcdl",
-  "description": "The XCDL command line application.",
-  "author": {
-    "name": "Liviu Ionescu",
-    "email": "ilg@livius.net",
-    "url": "http://liviusdotnet.wordpress.com"
-  },
-  "version": "1.1.2",
-  "main": "./lib/main.js",
-  "license": "GPL-3.0",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/xcdl/xcdl.git"
-  },
-  "contributors": [
-    {
-      "name": "Liviu Ionescu",
-      "email": "ilg@livius.net"
-    }
-  ],
-  "bugs": {
-    "url": "https://github.com/xcdl/xcdl/issues"
-  },
-  "homepage": "https://xcdl.github.io/"
+	"name": "xcdl",
+	"description": "The XCDL command line application.",
+	"keywords": 
+	[
+		"xcdl",
+		"packages",
+		"xpacks"
+	],
+
+	"author": 
+	{
+		"name": "Liviu Ionescu",
+		"email": "ilg@livius.net",
+		"url": "http://liviusdotnet.wordpress.com"
+	},
+
+	"version": "1.1.2",
+	"directories": 
+	{
+		"bin": "./bin",
+		"lib": "./lib"
+	},
+
+	"main": "./lib/main.js",
+	"bin": "./bin/xcdl-js-cli.js",
+	"license": "GPL-3.0",
+	"repository": 
+	{
+		"type": "git",
+		"url": "git://github.com/xcdl/xcdl-js.git"
+	},
+
+	"contributors": 
+	[
+		{
+			"name": "Liviu Ionescu",
+			"email": "ilg@livius.net"
+		}
+	],
+
+	"bugs": 
+	{
+		"url": "https://github.com/xcdl/xcdl-js/issues"
+	},
+
+	"homepage": "https://xcdl.github.io/",
+	"dependencies": 
+	{
+		
+	},
+
+	"bundleDependencies": 
+	[
+		
+	]
 }
