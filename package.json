@@ -47,11 +47,11 @@
 	"homepage": "https://xcdl.github.io/",
 	"dependencies": 
 	{
-		
+		"xml2js": "~0.4.15"
 	},
 
 	"bundleDependencies": 
 	[
-		
+		"xml2js"
 	]
 }
