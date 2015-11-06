@@ -1,8 +1,10 @@
 # xcdl-js
 
-An experimental version of the `xcdl` command line application, implemented in JavaScript in the node.js framework.
+An experimental version of the `xcdl` command line application, implemented in JavaScript in the node.js framework. The project is publicly available from [GitHub](https://github.com/xcdl). 
 
 ## Install
+
+The binary module is available in the NPM repository as [xcdl](https://www.npmjs.com/package/xcdl) and can be installed with:
 
 ```
 npm install xcdl
@@ -10,12 +12,13 @@ npm install xcdl
 
 ## Run
 
-The only command implemented is `generate-xpdsc`, to extract content from the CMSIS .pdsc files and store in JSON.
+### generate-xpdsc
+
+The only command implemented is `generate-xpdsc`, to extract content from a CMSIS .PDSC file and store it in JSON, to be included in XCDL packages.
 
 ```
 xcdl-js generate-xpdsc -i pdsc -o json
 ```
-
 
 ## Publish
 
