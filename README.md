@@ -17,7 +17,7 @@ npm install xcdl
 The only command implemented is `generate-xpdsc`, to extract content from a CMSIS .PDSC file and store it in JSON, to be included in XCDL packages.
 
 ```
-xcdl-js generate-xpdsc -i pdsc -o json
+~/node_modules/xcdl/bin/xcdl-js generate-xpdsc -i pdsc -o json
 ```
 
 ## Publish
