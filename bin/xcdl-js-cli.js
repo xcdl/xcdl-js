@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-;
+
 (function () { // wrapper in case we're in module_context mode
 
     app_name = 'xcdl-js';
@@ -22,4 +22,4 @@
 
     app.run(process.argv.slice(2));
 
-})()
+}());
