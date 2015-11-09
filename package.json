@@ -1,22 +1,21 @@
 {
 	"name": "xcdl",
 	"description": "The XCDL command line application.",
-	"keywords":
-	[
+	"keywords": [
 		"xcdl",
 		"packages",
 		"xpacks"
 	],
 
-	"author":
+	"author": 
 	{
 		"name": "Liviu Ionescu",
 		"email": "ilg@livius.net",
 		"url": "http://liviusdotnet.wordpress.com"
 	},
 
-	"version": "1.3.2",
-	"directories":
+	"version": "1.4.1",
+	"directories": 
 	{
 		"bin": "./bin",
 		"lib": "./lib"
@@ -25,32 +24,31 @@
 	"main": "./lib/main.js",
 	"bin": "./bin/xcdl-js-cli.js",
 	"license": "GPL-3.0",
-	"repository":
+	"repository": 
 	{
 		"type": "git",
 		"url": "git://github.com/xcdl/xcdl-js.git"
 	},
 
-	"contributors":
-	[
+	"contributors": [
 		{
 			"name": "Liviu Ionescu",
 			"email": "ilg@livius.net"
 		}
 	],
 
-	"bugs":
+	"bugs": 
 	{
 		"url": "https://github.com/xcdl/xcdl-js/issues"
 	},
 
 	"homepage": "https://xcdl.github.io/",
-	"dependencies":
+	"dependencies": 
 	{
 		"xml2js": "~0.4.15"
 	},
 
-	"bundleDependencies":
-	[
+	"bundleDependencies": [
+		
 	]
 }
