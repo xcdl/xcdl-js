@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.nodeclipse.debug.launch.LaunchConfigurationType">
+<stringAttribute key="attr_node_arguments" value="--debug"/>
+<stringAttribute key="attr_program_arguments" value="update-module"/>
+<stringAttribute key="attr_working_directory" value="/Users/ilg/My Files/MacBookPro Projects/xPacks/xpacks-repo.git/ilg/arm/arm-cmsis-xpack"/>
+<stringAttribute key="key_file_path" value="/xcdl-js/bin/xcdl-js-cli.js"/>
+</launchConfiguration>
