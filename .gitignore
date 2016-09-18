@@ -2,8 +2,7 @@
 Thumbs.db
 .settings/
 /node_modules/
-/xcdl-bin-xcdl-js-cli.js F4.launch
-/xcdl-bin-xcdl-js-cli.js F7.launch
-
-xcdl-bin-xcdl-js-cli.js.launch
+/*.launch
 npm-debug.log
+
+*.tgz
