@@ -1,6 +1,6 @@
 # xcdl-js
 
-An experimental version of the `xcdl` command line application, implemented in JavaScript in the **node.js** framework. The project is publicly available from [GitHub](https://github.com/xcdl/xcdl-js).
+An experimental version of the `xcdl` command line application, implemented in JavaScript in the node.js framework. The project is publicly available from [GitHub](https://github.com/xcdl/xcdl-js).
 
 ## Prerequisites
 
@@ -24,7 +24,7 @@ sudo npm install npm -g
 
 ## Install **xcdl**
 
-The **xcdl** binary module is available from the **npm** repository as [xcdl](https://www.npmjs.com/package/xcdl) and can be installed with:
+The **xcdl** binary module is available from the npm repository as [xcdl](https://www.npmjs.com/package/xcdl) and can be installed with:
 
 ```
 sudo npm install xcdl -g
@@ -52,7 +52,7 @@ xcdl generate-xpdsc -i pdsc -o json
 
 ## Development
 
-The current development environment is based on 
+The current development environment is based on [Visual Studio Code](https://code.visualstudio.com). The initial development environment was Eclipse with the `nodeclipse` plug-ins, but results were disappointing.
 
 ## Publish
 

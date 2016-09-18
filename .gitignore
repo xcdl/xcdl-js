@@ -4,5 +4,4 @@ Thumbs.db
 /node_modules/
 /*.launch
 npm-debug.log
-
 *.tgz
