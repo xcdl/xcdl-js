@@ -2,9 +2,9 @@
 
 (function () { // wrapper in case we're in module_context mode
 
-    app_name = 'xcdl-js';
+    app_name = 'xcdl';
 
-    // windows: running "xcdl blah" in this folder will invoke WSH, not node.
+    // Windows: running "xcdl blah" in this folder will invoke WSH, not node.
     /* global WScript */
     if (typeof WScript !== 'undefined') {
         WScript

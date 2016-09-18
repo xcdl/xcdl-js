@@ -16,7 +16,7 @@ APP_NAME="xcdl"
 APP_CLI_JS="$basedir/${APP_NAME}-cli.js"
 
 case `uname` in
-  *CYGWIN* | *MINGW* )
+  *CYGWIN*)
     APP_PREFIX=`"$NODE_EXE" "$APP_CLI_JS" prefix -g`
     APP_PREFIX_APP_CLI_JS="$APP_PREFIX/node_modules/${APP_NAME}/bin/${APP_NAME}-cli.js"
     if [ -f "$APP_PREFIX_APP_CLI_JS" ]; then
