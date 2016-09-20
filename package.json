@@ -17,12 +17,7 @@
 		"email": "ilg@livius.net",
 		"url": "http://liviusdotnet.wordpress.com"
 	},
-	"contributors": [
-		{
-			"name": "Liviu Ionescu",
-			"email": "ilg@livius.net"
-		}
-	],
+	"contributors": [],
 	"main": "./lib/main.js",
 	"bin": {
 		"xcdl": "./bin/xcdl-cli.js",
@@ -38,6 +33,7 @@
 		"url": "git://github.com/xcdl/xcdl-js.git"
 	},
 	"dependencies": {
+    "wscript-avoider": "",
 		"xml2js": "~0.4.15"
 	},
 	"devDependencies": {},

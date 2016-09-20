@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch",
+            "name": "Launch xcdl-cli.js",
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/bin/xcdl-cli.js",

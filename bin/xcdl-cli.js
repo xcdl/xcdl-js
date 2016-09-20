@@ -4,22 +4,13 @@
 
     app_name = 'xcdl';
 
-    // Windows: running "xcdl blah" in this folder will invoke WSH, not node.
-    /* global WScript */
-    if (typeof WScript !== 'undefined') {
-        WScript
-                .echo(app_name + ' does not work when run\n'
-                        + 'with the Windows Scripting Host\n\n'
-                        + "'cd' to a different folder,\n" + "or type '"
-                        + app_name + ".cmd <args>',\n" + "or type 'node "
-                        + app_name + " <args>'.");
-        WScript.quit(1);
-        return;
-    }
+    // On Windows: running 'xcdl blah' in this folder will invoke WSH, not node.
+    var wsa = require('wscript-avoider')
+    wsa.quit_if_wscript(app_name)
 
     process.title = app_name;
-    var app = require('../lib/main.js');
+    var app = require('../lib/main.js')
 
-    app.run(process.argv.slice(2));
+    app.run(process.argv.slice(2))
 
 }());
