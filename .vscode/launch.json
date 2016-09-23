@@ -6,8 +6,48 @@
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/bin/xcdl-cli.js",
-            "stopOnEntry": false,
+            "stopOnEntry": true,
             "args": [],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "runtimeExecutable": null,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "console": "internalConsole",
+            "sourceMaps": false,
+            "outDir": null
+        },
+        {
+            "name": "Launch xcdl-cli.js generate-xpdsc",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/xcdl-cli.js",
+            "stopOnEntry": true,
+            "args": [ "generate-xpdsc", "-i", "xxx", "-o", "yyy" ],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "runtimeExecutable": null,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "console": "internalConsole",
+            "sourceMaps": false,
+            "outDir": null
+        },
+        {
+            "name": "Launch xpack generate-xpdsc",
+            "type": "node",
+            "request": "launch",
+            "program": "/Users/ilg/Applications/bin/xpack",
+            "stopOnEntry": true,
+            "args": [ "generate-xpdsc", "-i", "xxx", "-o", "yyy" ],
             "cwd": "${workspaceRoot}",
             "preLaunchTask": null,
             "runtimeExecutable": null,
