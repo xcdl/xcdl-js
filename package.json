@@ -1,45 +1,46 @@
 {
-	"name": "xcdl",
-	"version": "1.5.5",
-	"description": "The XCDL command line application.",
-	"keywords": [
-		"xcdl",
-		"packages",
-		"xpacks"
-	],
-	"homepage": "https://xcdl.github.io/",
-	"bugs": {
-		"url": "https://github.com/xcdl/xcdl-js/issues"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Liviu Ionescu",
-		"email": "ilg@livius.net",
-		"url": "http://liviusdotnet.wordpress.com"
-	},
-	"contributors": [],
-	"main": "./lib/main.js",
-	"bin": {
-		"xcdl": "./bin/xcdl-cli.js",
-		"xpack": "./bin/xcdl-cli.js"
-	},
-	"directories": {
-		"lib": "./lib"
-	},
-	"scripts": {},
-	"config": {},
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/xcdl/xcdl-js.git"
-	},
-	"dependencies": {
-    "wscript-avoider": "",
-		"xml2js": "~0.4.15"
-	},
-	"devDependencies": {},
-	"peerDependencies": {},
-	"bundleDependencies": [],
-	"engines": {
-		"node": ">6.5.0"
-	}
+  "name": "xcdl",
+  "version": "1.5.5",
+  "description": "The XCDL command line application.",
+  "keywords": [
+    "xcdl",
+    "packages",
+    "xpacks"
+  ],
+  "homepage": "https://xcdl.github.io/",
+  "bugs": {
+    "url": "https://github.com/xcdl/xcdl-js/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Liviu Ionescu",
+    "email": "ilg@livius.net",
+    "url": "http://liviusdotnet.wordpress.com"
+  },
+  "contributors": [],
+  "main": "./lib/xcdl.js",
+  "bin": {
+    "xcdl": "./bin/xcdl-cli.js",
+    "xpack": "./bin/xcdl-cli.js"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "scripts": {},
+  "config": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/xcdl/xcdl-js.git"
+  },
+  "dependencies": {
+    "wscript-avoider": "latest",
+    "npmlog": "~4.0.0",
+    "xml2js": "~0.4.15"
+  },
+  "devDependencies": {},
+  "peerDependencies": {},
+  "bundleDependencies": [],
+  "engines": {
+    "node": ">6.5.0"
+  }
 }
