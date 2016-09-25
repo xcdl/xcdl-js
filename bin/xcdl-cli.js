@@ -35,7 +35,7 @@
 // Wrapper in case we're in module_context mode.
 // Prevent the '(' being interpreted as a function call,
 // define an anonymous function and execute it.
-; (function () {
+; (function xcdlCli() {
 
   'use strict'
 
@@ -90,10 +90,9 @@
   log.level = 'verbose'
   log.resume()
 
-  if (xcdl.isOneShot(process.argv, cmd)) {
+  if (!xcdl.isInterractive(process.argv, cmd)) {
     // Single shot invocation.
 
-    //xcdl.run(args)
     let ctx = vm.createContext()
 
     // This is the only mandatory field in the context, so far.    
@@ -105,21 +104,17 @@
     // The process arguments are passed via a custom context field.
     ctx.processArgv = args
 
-    ctx.isBatch = true    
+    ctx.isBatch = true
     let cmdLine = args.join(' ')
     let filename = null
-    xcdl.run(cmdLine, ctx, filename, (er) => {
-      if (er) {
-        console.error('Error:', er.message)
-      }
-    })
+    xcdl.run(cmdLine, ctx, filename, (er) => { })
+
   } else {
     // Interractive mode.
 
-    // TODO: get rid of the stack trace.    
-    const d = require('domain').create();
-    d.on('error', (er) => {
-      console.error('ErroR:', er.message)
+    const domain = require('domain').create();
+    domain.on('error', (er) => {
+      console.error('Error:', er.message)
     })
 
     const repl = require('repl')
@@ -128,8 +123,34 @@
         prompt: cmd + '> '
         , eval: xcdl.run
         , completer: xcdl.completer
-        , domain: d
+        , domain: domain
       })
+
+    // ------------------------------------------------------------------------
+    // Debug only, to test if everything goes to the correct stream.
+
+    const net = require('net')
+    var connections = 0
+
+    const domainSock = require('domain').create();
+    domainSock.on('error', (er) => {
+      console.error('ErroRS:', er.message)
+    })
+
+    net.createServer((socket) => {
+      connections += 1;
+      repl.start({
+        prompt: cmd + '> '
+        , input: socket
+        , output: socket
+        , eval: xcdl.run
+        , completer: xcdl.completer
+        , domain: domainSock
+      }).on('exit', () => {
+        console.log('socket exit')
+        socket.end()
+      })
+    }).listen(5001)
 
   }
 
