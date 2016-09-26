@@ -91,7 +91,7 @@
   log.resume()
 
   if (!xcdl.isInterractive(process.argv, cmd)) {
-    // Single shot invocation.
+    // Batch mode (single shot invocation).
 
     let ctx = vm.createContext()
 
@@ -104,18 +104,37 @@
     // The process arguments are passed via a custom context field.
     ctx.processArgv = args
 
-    ctx.isBatch = true
+    // ctx.isBatch = true
+
     let cmdLine = args.join(' ')
     let filename = null
-    xcdl.run(cmdLine, ctx, filename, (er) => { })
+
+    // Call the runner using the same API as when comming from REPL.
+    xcdl.run(cmdLine, ctx, filename, (err, data) => {
+      if (err) {
+        // Display a single line message.
+        // No concerns with the stack trace (yet).
+        console.log(err.message)
+        return
+      }
+    })
 
   } else {
     // Interractive mode.
 
+    const errorCallback = function errorCallback(err) {
+      // if (!(err instanceof SyntaxError)) {
+      // System errors deserve their stack trace.
+      if (!(err instanceof EvalError) && !(err instanceof SyntaxError) && !(err instanceof RangeError) && !(err instanceof ReferenceError) && !(err instanceof TypeError) && !(err instanceof URIError)) {
+        // For regular errors it makes no sense to display the stack trace.
+        err.stack = null
+        // The error message will be displayed shortly, in the next handler,
+        // registered by the REPL server.
+      }
+    }
+
     const domain = require('domain').create();
-    domain.on('error', (er) => {
-      console.error('Error:', er.message)
-    })
+    domain.on('error', errorCallback)
 
     const repl = require('repl')
     const replServer = repl.start(
@@ -133,9 +152,7 @@
     var connections = 0
 
     const domainSock = require('domain').create();
-    domainSock.on('error', (er) => {
-      console.error('ErroRS:', er.message)
-    })
+    domainSock.on('error', errorCallback)
 
     net.createServer((socket) => {
       connections += 1;
@@ -151,7 +168,6 @@
         socket.end()
       })
     }).listen(5001)
-
   }
 
 } ())
