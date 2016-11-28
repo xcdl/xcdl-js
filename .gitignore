@@ -5,3 +5,5 @@ Thumbs.db
 /*.launch
 npm-debug.log
 *.tgz
+vscode.mac.command
+
