@@ -42,6 +42,66 @@
             "outDir": null
         },
         {
+            "name": "Launch xcdl-cli.js generate-xsvd stm32f4",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/xcdl-cli.js",
+            "stopOnEntry": false,
+            "args": [ "generate-xsvd", "-i", "/Users/ilg/Library/xPacks/Keil/STM32F4xx_DFP/2.9.0/CMSIS/SVD/STM32F40x.svd", "-o", "/Users/ilg/tmp/xsvd/STM32F40x-svd.json" ],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "runtimeExecutable": null,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "console": "internalConsole",
+            "sourceMaps": false,
+            "outDir": null
+        },
+        {
+            "name": "Launch xcdl-cli.js patch-xsvd stm32f4",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/xcdl-cli.js",
+            "stopOnEntry": false,
+            "args": [ "patch-xsvd", "-i", "/Users/ilg/tmp/xsvd/STM32F40x-svd.json",  "-p", "/Users/ilg/tmp/xsvd/STM32F40x-patch.json","-o", "/Users/ilg/tmp/xsvd/STM32F40x-qemu.json" ],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "runtimeExecutable": null,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "console": "internalConsole",
+            "sourceMaps": false,
+            "outDir": null
+        },
+        {
+            "name": "Launch xcdl-cli.js generate-xsvd xmc4800",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/xcdl-cli.js",
+            "stopOnEntry": false,
+            "args": [ "generate-xsvd", "-i", "/Users/ilg/My Files/MacBookPro Projects/GNU ARM Eclipse/Eclipse Workspaces/Packages/Infineon/XMC4000_DFP/2.5.0/SVD/XMC4800.svd", "-o", "/Users/ilg/tmp/xsvd/XMC4800-svd.json" ],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "runtimeExecutable": null,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "console": "internalConsole",
+            "sourceMaps": false,
+            "outDir": null
+        },
+        {
             "name": "Launch xpack generate-xpdsc",
             "type": "node",
             "request": "launch",
