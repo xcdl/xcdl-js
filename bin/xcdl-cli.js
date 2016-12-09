@@ -74,7 +74,7 @@
   // Skip the first two strings and keep only the specific ones.
   let args = process.argv.slice(2)
 
-  // Als o used as prompt in interractive mode.  
+  // Also used as prompt in interractive mode.  
   let cmd = path.basename(process.argv[1])
 
   if (cmd === 'xpack') {
