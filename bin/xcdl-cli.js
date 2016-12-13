@@ -88,7 +88,7 @@
   }
 
   log.level = 'verbose'
-  log.resume()
+  log.resume()  
 
   if (!xcdl.isInterractive(process.argv, cmd)) {
     // Batch mode (single shot invocation).
