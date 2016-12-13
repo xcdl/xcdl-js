@@ -47,7 +47,7 @@
             "request": "launch",
             "program": "${workspaceRoot}/bin/xcdl-cli.js",
             "stopOnEntry": false,
-            "args": [ "generate-xsvd", "-i", "/Users/ilg/Library/xPacks/Keil/STM32F4xx_DFP/2.9.0/CMSIS/SVD/STM32F40x.svd", "-o", "/Users/ilg/tmp/xsvd/STM32F40x-svd.json" ],
+            "args": [ "generate-xsvd", "--ifile", "/Users/ilg/Library/xPacks/Keil/STM32F4xx_DFP/2.9.0/CMSIS/SVD/STM32F40x.svd", "--ofile", "/Users/ilg/tmp/xsvd/STM32F40x-svd.json" ],
             "cwd": "${workspaceRoot}",
             "preLaunchTask": null,
             "runtimeExecutable": null,
