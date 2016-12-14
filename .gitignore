@@ -7,3 +7,4 @@ npm-debug.log
 *.tgz
 vscode.mac.command
 
+.browse.*
