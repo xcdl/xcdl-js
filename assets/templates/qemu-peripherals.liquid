@@ -56,11 +56,11 @@ typedef PeripheralState {{ vendorPrefix }}{{ periphName }}ParentState;
     OBJECT_CLASS_CHECK({{ vendorPrefix }}{{ periphName }}Class, (klass), TYPE_{{ vendorPrefix }}_{{ periphName }})
 
 typedef struct {
-    /*< private >*/
+    // private: 
     {{ vendorPrefix }}{{ periphName }}ParentClass parent_class;
-    /*< public >*/
+    // public: 
 
-    /* None, so far. */
+    // None, so far.
 } {{ vendorPrefix }}{{ periphName }}Class;
 
 // ----------------------------------------------------------------------------
@@ -70,9 +70,9 @@ typedef struct {
     OBJECT_CHECK({{ vendorPrefix }}{{ periphName }}State, (obj), TYPE_{{ vendorPrefix }}_{{ periphName }})
 
 typedef struct {
-    /*< private >*/
+    // private:
     {{ vendorPrefix }}{{ periphName }}ParentState parent_obj;
-    /*< public >*/
+    // public:
 
     const {{ vendorPrefix }}Capabilities *capabilities;
 
