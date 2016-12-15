@@ -38,6 +38,15 @@
 
 // ----------------------------------------------------------------------------
 
+// Note: the "port-index" property has type "int".
+typedef enum {
+    {{ vendorPrefix }}_{{ periphName }}_PORT_1 = 0,
+    // TODO add all other peripherals in this group
+    {{ vendorPrefix }}_{{ periphName }}_PORT_UNDEFINED = 0xFF,
+} {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_index_t;
+
+// ----------------------------------------------------------------------------
+
 #define TYPE_{{ vendorPrefix }}_{{ periphName }} TYPE_{{ vendorPrefix }}_PREFIX "{{ periphName | downcase }}" TYPE_PERIPHERAL_SUFFIX
 
 // ----------------------------------------------------------------------------
@@ -78,6 +87,12 @@ typedef struct {
 
     MemoryRegion mmio;
 
+    // Points to the bitfield that enables the peripheral.
+    Object *enabling_bit;
+{% if peripheral.qemuGroupName %}
+    // Remove it if there is only one port
+    {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_index_t port_index;
+{% endif %}
     union {
       // ----- 8< ----- 8< -----  8< ----- 8< ----- 8< ----- 8< ----- 8< -----
 
@@ -136,6 +151,8 @@ typedef struct {
 
 // ----- Generated code -------------------------------------------------------
 //
+// ----- 8< ----- 8< -----  8< ----- 8< ----- 8< ----- 8< ----- 8< -----
+
 // DO NOT EDIT! Automatically generated!
 static void {{ deviceName | downcase }}_{{ periphName | downcase }}_create_objects(Object *obj, JSON_Object *svd, const char *name)
 {
@@ -151,6 +168,8 @@ static void {{ deviceName | downcase }}_{{ periphName | downcase }}_create_objec
     // {{ register.name }} bitfields.{% for field in register.fields %}
     state->u.{{ deviceFamily | downcase }}.fld.{{ register.name | downcase}}.{{ field.name | downcase }} = cm_object_get_child_by_name(state->u.{{ deviceFamily | downcase }}.reg.{{ register.name | downcase }}, "{{ field.name }}"); {% endfor %} {% endfor %}
 }
+
+// ----- 8< ----- 8< -----  8< ----- 8< ----- 8< ----- 8< ----- 8< -----
 
 // ----- Private --------------------------------------------------------------
 
@@ -217,7 +236,12 @@ static void {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_instance_i
     {{ vendorPrefix }}{{ periphName }}State *state = {{ vendorPrefix }}_{{ periphName }}_STATE(obj);
 
     // Capabilities are not yet available.
-
+{% if peripheral.qemuGroupName %}
+    cm_object_property_add_int(obj, "port-index",
+            (const int *) &state->port_index);
+    state->port_index = {{ vendorPrefix }}_{{ periphName }}_PORT_UNDEFINED;
+{% endif %}
+    state->enabling_bit = NULL;
     // TODO: Add code to initialise all members.
 }
 
@@ -243,6 +267,8 @@ static void {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_realize_ca
 
     const char *periph_name = "{{ periphName }}";
 
+    char enabling_bit_name[{{ vendorPrefix }}_RCC_SIZEOF_ENABLING_BITFIELD];
+
     switch (capabilities->family) {
     case {{ vendorPrefix }}_FAMILY_{{ deviceFamily }}:
 
@@ -261,6 +287,14 @@ static void {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_realize_ca
             // peripheral_register_set_post_write(state->{{ deviceFamily | downcase }}.reg.xxx, &{{ vendorPrefix | downcase }}_{{ periphName | downcase }}_xxx_post_write_callback);
 
             // TODO: add interrupts.
+{% if peripheral.qemuGroupName %}
+            snprintf(enabling_bit_name, sizeof(enabling_bit_name) - 1,
+                DEVICE_PATH_{{ vendorPrefix }}_RCC "/AHB1ENR/{{ periphName }}%dEN",
+                state->port_index - {{ vendorPrefix }}_{{ periphName }}_PORT_A + 1);
+{% else %}
+            snprintf(enabling_bit_name, sizeof(enabling_bit_name) - 1,
+                DEVICE_PATH_{{ vendorPrefix }}_RCC "/AHB1ENR/{{ periphName }}EN");
+{% endif %}
 
         } else {
             assert(false);
@@ -272,6 +306,8 @@ static void {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_realize_ca
         assert(false);
         break;
     }
+
+    state->enabling_bit = OBJECT(cm_device_by_name(enabling_bit_name));
 
     svd_set_peripheral_address_block(cm_state->svd_json, periph_name, obj);
 
