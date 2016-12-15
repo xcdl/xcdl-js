@@ -6,7 +6,7 @@
 // ----- 8< ----- 8< -----  8< ----- 8< ----- 8< ----- 8< ----- 8< -----
 
 /*
- * {{ vendorPrefix }} - {{ periphName }} emulation.
+ * {{ vendorPrefix }} - {{ periphName }} ({{ peripheral.description }}) emulation.
  *
  * Copyright (c) 2016 Liviu Ionescu.
  *
@@ -87,6 +87,7 @@ typedef struct {
 
     MemoryRegion mmio;
 
+    // TODO: remove this if the peripheral is always enabled.
     // Points to the bitfield that enables the peripheral.
     Object *enabling_bit;
 {% if peripheral.qemuGroupName %}
@@ -126,7 +127,7 @@ typedef struct {
 // ----- 8< ----- 8< -----  8< ----- 8< ----- 8< ----- 8< ----- 8< -----
 
 /*
- * {{ vendorPrefix }} - {{ periphName }} emulation.
+ * {{ vendorPrefix }} - {{ periphName }} ({{ peripheral.description }}) emulation.
  *
  * Copyright (c) 2016 Liviu Ionescu.
  *
@@ -229,6 +230,19 @@ static void {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_xxx_post_r
 
 // ----------------------------------------------------------------------------
 
+// TODO: remove this if the peripheral is always enabled.
+static bool {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_is_enabled(Object *obj)
+{
+    {{ vendorPrefix }}{{ periphName }}State *state = {{ vendorPrefix }}_{{ periphName }}_STATE(obj);
+
+    if (register_bitfield_is_non_zero(state->enabling_bit)) {
+        return true; // Positive logic, bit == 1 means enabled.
+    }
+
+    // Not enabled
+    return false;
+}
+
 static void {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_instance_init_callback(Object *obj)
 {
     qemu_log_function_name();
@@ -241,6 +255,7 @@ static void {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_instance_i
             (const int *) &state->port_index);
     state->port_index = {{ vendorPrefix }}_{{ periphName }}_PORT_UNDEFINED;
 {% endif %}
+    // TODO: remove this if the peripheral is always enabled.
     state->enabling_bit = NULL;
     // TODO: Add code to initialise all members.
 }
@@ -267,6 +282,7 @@ static void {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_realize_ca
 
     const char *periph_name = "{{ periphName }}";
 
+    // TODO: remove this if the peripheral is always enabled.
     char enabling_bit_name[{{ vendorPrefix }}_RCC_SIZEOF_ENABLING_BITFIELD];
 
     switch (capabilities->family) {
@@ -288,10 +304,12 @@ static void {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_realize_ca
 
             // TODO: add interrupts.
 {% if peripheral.qemuGroupName %}
+            // TODO: remove this if the peripheral is always enabled.
             snprintf(enabling_bit_name, sizeof(enabling_bit_name) - 1,
                 DEVICE_PATH_{{ vendorPrefix }}_RCC "/AHB1ENR/{{ periphName }}%dEN",
                 state->port_index - {{ vendorPrefix }}_{{ periphName }}_PORT_A + 1);
 {% else %}
+            // TODO: remove this if the peripheral is always enabled.
             snprintf(enabling_bit_name, sizeof(enabling_bit_name) - 1,
                 DEVICE_PATH_{{ vendorPrefix }}_RCC "/AHB1ENR/{{ periphName }}EN");
 {% endif %}
@@ -331,6 +349,10 @@ static void {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_class_init
 
     dc->reset = {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_reset_callback;
     dc->realize = {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_realize_callback;
+
+    // TODO: remove this if the peripheral is always enabled.
+    PeripheralClass *per_class = PERIPHERAL_CLASS(klass);
+    per_class->is_enabled = {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_is_enabled;
 }
 
 static const TypeInfo {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_type_info = {
