@@ -1,8 +1,7 @@
 // DO NOT EDIT! Automatically generated!
 // Support code for {{ deviceName }}.
 
-{% for peripheral in peripherals %}{% assign periphName = peripheral.name %}
-
+{% for peripheral in peripherals %}{% assign periphName = peripheral.name %}{% if peripheral.qemuGroupName %}{% assign periphName = peripheral.qemuGroupName %}{% endif %}{% if peripheral.registers %}
 // File: {{ vendorPrefix | downcase }}/{{ periphName | downcase }}.h
 // ----- 8< ----- 8< -----  8< ----- 8< ----- 8< ----- 8< ----- 8< -----
 
@@ -317,4 +316,4 @@ type_init({{ vendorPrefix | downcase }}_{{ periphName | downcase }}_register_typ
 
 // ----- 8< ----- 8< -----  8< ----- 8< ----- 8< ----- 8< ----- 8< -----
 
-{% endfor %}
+{% endif %}{% endfor %}
