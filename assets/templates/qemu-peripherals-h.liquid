@@ -29,14 +29,14 @@
 
 #define DEVICE_PATH_{{ vendorPrefix }}_{{ periphName }} DEVICE_PATH_{{ vendorPrefix }} "{{ periphName }}"
 
-// ----------------------------------------------------------------------------
+{% if peripheral.qemuGroupName %}// ----------------------------------------------------------------------------
 
 // Note: the "port-index" property has type "int".
 typedef enum {
-    {{ vendorPrefix }}_{{ periphName }}_PORT_1 = 0,
-    // TODO add all other peripherals in this group
-    {{ vendorPrefix }}_{{ periphName }}_PORT_UNDEFINED = 0xFF,
-} {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_index_t;
+    // TODO: keep this list ordered.{% for port in peripherals %}{% if port.qemuGroupName == peripheral.qemuGroupName %}
+    {{ vendorPrefix }}_PORT_{{ port.name }},{% endif %}{% endfor %}
+    {{ vendorPrefix }}_PORT_{{ periphName }}_UNDEFINED = 0xFF,
+} {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_index_t;{% endif %}
 
 // ----------------------------------------------------------------------------
 
