@@ -62,6 +62,26 @@
             "outDir": null
         },
         {
+            "name": "Launch xcdl-cli.js svd-patch stm32f4",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/xcdl-cli.js",
+            "stopOnEntry": false,
+            "args": [ "svd-patch", "--i", "/Users/ilg/tmp/xsvd/STM32F40x-svd.json",  "-p", "/Users/ilg/tmp/xsvd/STM32F40x-patch.json","-o", "/Users/ilg/tmp/xsvd/STM32F40x-qemu.json" ],
+            "cwd": "${workspaceRoot}",
+            "preLaunchTask": null,
+            "runtimeExecutable": null,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "console": "internalConsole",
+            "sourceMaps": false,
+            "outDir": null
+        },
+        {
             "name": "Launch xcdl-cli.js patch-xsvd stm32f4",
             "type": "node",
             "request": "launch",
