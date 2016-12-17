@@ -35,11 +35,11 @@ static void {{ deviceName | downcase }}_{{ periphName | downcase }}_create_objec
     svd_add_peripheral_properties_and_children(obj, periph, svd);
 
     // Registers. {% for register in peripheral.registers %}
-    state->u.{{ deviceFamily | downcase }}.reg.{{ register.name | downcase }} = cm_object_get_child_by_name(obj, "{{ register.name }}");{% endfor %}
+    state->u.{{ deviceFamily | downcase }}.reg.{{ register.name | downcase | c_reserved }} = cm_object_get_child_by_name(obj, "{{ register.name }}");{% endfor %}
     {% for register in peripheral.registers %}
     
     // {{ register.name }} bitfields.{% for field in register.fields %}
-    state->u.{{ deviceFamily | downcase }}.fld.{{ register.name | downcase}}.{{ field.name | downcase }} = cm_object_get_child_by_name(state->u.{{ deviceFamily | downcase }}.reg.{{ register.name | downcase }}, "{{ field.name }}"); {% endfor %} {% endfor %}
+    state->u.{{ deviceFamily | downcase }}.fld.{{ register.name | downcase | c_reserved }}.{{ field.name | downcase | c_reserved }} = cm_object_get_child_by_name(state->u.{{ deviceFamily | downcase }}.reg.{{ register.name | downcase | c_reserved }}, "{{ field.name }}"); {% endfor %} {% endfor %}
 }
 
 // ----- 8< ----- 8< -----  8< ----- 8< ----- 8< ----- 8< ----- 8< -----
