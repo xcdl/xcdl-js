@@ -185,7 +185,7 @@ static void {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_realize_ca
            // TODO: remove this if the peripheral is always enabled.
            snprintf(enabling_bit_name, sizeof(enabling_bit_name) - 1,
                 DEVICE_PATH_{{ vendorPrefix }}_RCC "/AHB1ENR/{{ periphName }}%dEN",
-                state->port_index - {{ vendorPrefix }}_PORT_{{ periphName }}1 + 1);
+                1 + state->port_index - {{ vendorPrefix }}_PORT_{{ periphName }}1);
 {% else %}
             // TODO: remove this if the peripheral is always enabled.
             snprintf(enabling_bit_name, sizeof(enabling_bit_name) - 1,

@@ -33,7 +33,7 @@
 
 // Note: the "port-index" property has type "int".
 typedef enum {
-    // TODO: keep this list ordered.{% for port in peripherals %}{% if port.qemuGroupName == peripheral.qemuGroupName %}
+    // TODO: keep this list in ascending order.{% for port in peripherals %}{% if port.qemuGroupName == peripheral.qemuGroupName %}
     {{ vendorPrefix }}_PORT_{{ port.name }},{% endif %}{% endfor %}
     {{ vendorPrefix }}_PORT_{{ periphName }}_UNDEFINED = 0xFF,
 } {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_index_t;{% endif %}
