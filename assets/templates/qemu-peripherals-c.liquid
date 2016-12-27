@@ -1,4 +1,8 @@
-{% assign periphName = peripheral.name %}{% if peripheral.qemuGroupName %}{% assign periphName = peripheral.qemuGroupName %}{% endif %}/*
+{% assign periphName = peripheral.name %}
+{% if peripheral.qemuGroupName %}
+{% assign periphName = peripheral.qemuGroupName %}
+{% endif %}
+/*
  * {{ vendorPrefix }} - {{ periphName }} ({{ peripheral.description }}) emulation.
  *
  * Copyright (c) 2016 Liviu Ionescu.
@@ -34,12 +38,17 @@ static void {{ deviceName | downcase }}_{{ periphName | downcase }}_create_objec
     JSON_Object *periph = svd_get_peripheral_by_name(svd, name);
     svd_add_peripheral_properties_and_children(obj, periph, svd);
 
-    // Registers. {% for register in peripheral.registers %}
-    state->u.{{ deviceFamily | downcase }}.reg.{{ register.name | downcase | c_reserved }} = cm_object_get_child_by_name(obj, "{{ register.name }}");{% endfor %}
-    {% for register in peripheral.registers %}
+    // Registers. 
+{% for register in peripheral.registers %}
+    state->u.{{ deviceFamily | downcase }}.reg.{{ register.name | downcase | c_reserved }} = cm_object_get_child_by_name(obj, "{{ register.name }}");
+{% endfor %}
+{% for register in peripheral.registers %}
     
-    // {{ register.name }} bitfields.{% for field in register.fields %}
-    state->u.{{ deviceFamily | downcase }}.fld.{{ register.name | downcase | c_reserved }}.{{ field.name | downcase | c_reserved }} = cm_object_get_child_by_name(state->u.{{ deviceFamily | downcase }}.reg.{{ register.name | downcase | c_reserved }}, "{{ field.name }}"); {% endfor %} {% endfor %}
+    // {{ register.name }} bitfields.
+{% for field in register.fields %}
+    state->u.{{ deviceFamily | downcase }}.fld.{{ register.name | downcase | c_reserved }}.{{ field.name | downcase | c_reserved }} = cm_object_get_child_by_name(state->u.{{ deviceFamily | downcase }}.reg.{{ register.name | downcase | c_reserved }}, "{{ field.name }}"); 
+{% endfor %} 
+{% endfor %}
 }
 
 // ----- 8< ----- 8< -----  8< ----- 8< ----- 8< ----- 8< ----- 8< -----
@@ -122,11 +131,13 @@ static void {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_instance_i
     {{ vendorPrefix }}{{ periphName }}State *state = {{ vendorPrefix }}_{{ periphName }}_STATE(obj);
 
     // Capabilities are not yet available.
+
 {% if peripheral.qemuGroupName %}
     cm_object_property_add_int(obj, "port-index",
             (const int *) &state->port_index);
     state->port_index = {{ vendorPrefix }}_PORT_{{ periphName }}_UNDEFINED;
 {% endif %}
+
     // TODO: remove this if the peripheral is always enabled.
     state->enabling_bit = NULL;
     
@@ -181,6 +192,7 @@ static void {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_realize_ca
             // peripheral_register_set_post_write(state->{{ deviceFamily | downcase }}.reg.xxx, &{{ vendorPrefix | downcase }}_{{ periphName | downcase }}_xxx_post_write_callback);
 
             // TODO: add interrupts.
+
 {% if peripheral.qemuGroupName %}
            // TODO: remove this if the peripheral is always enabled.
            snprintf(enabling_bit_name, sizeof(enabling_bit_name) - 1,

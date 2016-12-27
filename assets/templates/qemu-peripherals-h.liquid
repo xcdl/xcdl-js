@@ -1,4 +1,8 @@
-{% assign periphName = peripheral.name %}{% if peripheral.qemuGroupName %}{% assign periphName = peripheral.qemuGroupName %}{% endif %}/*
+{% assign periphName = peripheral.name %}
+{% if peripheral.qemuGroupName %}
+{% assign periphName = peripheral.qemuGroupName %}
+{% endif %}
+/*
  * {{ vendorPrefix }} - {{ periphName }} ({{ peripheral.description }}) emulation.
  *
  * Copyright (c) 2016 Liviu Ionescu.
@@ -29,14 +33,20 @@
 
 #define DEVICE_PATH_{{ vendorPrefix }}_{{ periphName }} DEVICE_PATH_{{ vendorPrefix }} "{{ periphName }}"
 
-{% if peripheral.qemuGroupName %}// ----------------------------------------------------------------------------
+{% if peripheral.qemuGroupName %}
+// ----------------------------------------------------------------------------
 
 // Note: the "port-index" property has type "int".
 typedef enum {
-    // TODO: keep this list in ascending order.{% for port in peripherals %}{% if port.qemuGroupName == peripheral.qemuGroupName %}
-    {{ vendorPrefix }}_PORT_{{ port.name }},{% endif %}{% endfor %}
+    // TODO: keep this list in ascending order.
+{% for port in peripherals %}
+{% if port.qemuGroupName == peripheral.qemuGroupName %}
+    {{ vendorPrefix }}_PORT_{{ port.name }},
+{% endif %}
+{% endfor %}
     {{ vendorPrefix }}_PORT_{{ periphName }}_UNDEFINED = 0xFF,
-} {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_index_t;{% endif %}
+} {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_index_t;
+{% endif %}
 
 // ----------------------------------------------------------------------------
 
@@ -81,10 +91,12 @@ typedef struct {
     // TODO: remove this if the peripheral is always enabled.
     // Points to the bitfield that enables the peripheral.
     Object *enabling_bit;
+
 {% if peripheral.qemuGroupName %}
     // Remove it if there is only one port
     {{ vendorPrefix | downcase }}_{{ periphName | downcase }}_index_t port_index;
 {% endif %}
+
     union {
       // ----- 8< ----- 8< -----  8< ----- 8< ----- 8< ----- 8< ----- 8< -----
 
@@ -92,16 +104,24 @@ typedef struct {
       // Merge fields from different family members.
       struct {
         // {{ deviceFamily }} {{ periphName }} ({{ peripheral.description }}) registers.
-        struct { {% for register in peripheral.registers %}
-          Object *{{ register.name | downcase | c_reserved }}; // {{ register.addressOffset}} ({{ register.description }}) {% endfor %}
+        struct { 
+{% for register in peripheral.registers %}
+          Object *{{ register.name | downcase | c_reserved }}; // {{ register.addressOffset}} ({{ register.description }}) 
+{% endfor %}
         } reg;
 
-        struct { {% for register in peripheral.registers %}
+        struct { 
+{% for register in peripheral.registers %}
           
           // {{ register.name }} ({{ register.description }}) bitfields.
-          struct { {% if register.fields %}{% for field in register.fields %}
-            Object *{{ field.name | downcase | c_reserved }}; // [{{ field.bitOffset }}:{{ field.bitOffset | plus: field.bitWidth | minus: 1 }}] {{ field.description }} {% endfor %} {% endif %}
-          } {{ register.name | downcase | c_reserved }}; {% endfor %}
+          struct { 
+{% if register.fields %}
+{% for field in register.fields %}
+            Object *{{ field.name | downcase | c_reserved }}; // [{{ field.bitOffset }}:{{ field.bitOffset | plus: field.bitWidth | minus: 1 }}] {{ field.description }} 
+{% endfor %} 
+{% endif %}
+          } {{ register.name | downcase | c_reserved }}; 
+{% endfor %}
         } fld;
       } {{ deviceFamily | downcase }};
 
