@@ -1,3 +1,5 @@
+[![NPM version](https://img.shields.io/npm/v/xcdl.svg?style=flat)](https://www.npmjs.com/package/xcdl)
+
 # xcdl-js
 
 An experimental version of the `xcdl` command line application, implemented in JavaScript in the node.js framework. The project is publicly available from [GitHub](https://github.com/xcdl/xcdl-js).
