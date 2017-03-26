@@ -33,7 +33,7 @@
     "url": "git://github.com/xcdl/xcdl-js.git"
   },
   "dependencies": {
-    "wscript-avoider": "latest",
+    "wscript-avoider": "~3.0.0",
     "npmlog": "~4.0.0",
     "xml2js": "~0.4.15",
     "shopify-liquid": "~1.7.1"

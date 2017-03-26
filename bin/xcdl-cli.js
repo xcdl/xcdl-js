@@ -40,8 +40,11 @@
   'use strict'
 
   // --------------------------------------------------------------------------  
-  // Dependencies.  
-  const avoider = require('wscript-avoider')
+  // Dependencies.
+  
+  // `import { WscriptAvoider} from 'wscript-avoider.js'
+  const WscriptAvoider = require('wscript-avoider').WscriptAvoider
+
   const path = require('path')
   const vm = require('vm')
 
@@ -51,24 +54,7 @@
   // const repl = require('repl')
 
   // --------------------------------------------------------------------------    
-  // Application name.  
-  const appName = 'xcdl'
-
-  // Avoid running on WScript.
-  avoider.quit_if_wscript(appName)
-
-  // Replace 'node' with the application name, to help `ps` show
-  // a more accurate situation.
-  process.title = appName
-
-  const log = require('npmlog')
-  log.pause() // will be unpaused after config is loaded.
-  log.disableColor()
-
-  log.info('it worked if it ends with', 'ok')
-  log.info(`argv0: ${process.argv[1]}`)
-
-
+  // Get command, to use it as application name.
   // argv[0] = '/usr/local/bin/node'
   // argv[1] = '/.../xcdl-js.git/bin/xcdl-cli.js' or '/.../bin/xpack'
   // Skip the first two strings and keep only the specific ones.
@@ -76,6 +62,20 @@
 
   // Also used as prompt in interractive mode.  
   let cmd = path.basename(process.argv[1])
+  
+  // Avoid running on WScript.
+  WscriptAvoider.quitIfWscript(cmd)
+
+  // Replace 'node' with the application name, to help `ps` show
+  // a more accurate situation.
+  process.title = cmd
+
+  const log = require('npmlog')
+  log.pause() // will be unpaused after config is loaded.
+  // log.disableColor()
+
+  log.info('it worked if it ends with', 'ok')
+  log.info(`argv0: ${process.argv[1]}`)
 
   if (cmd === 'xpack') {
     // Transform 'xpack a b c' -> 'xcdl pack a b c'
